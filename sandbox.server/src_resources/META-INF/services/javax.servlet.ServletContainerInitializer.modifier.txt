@@ -1,1 +1,1 @@
-type=txt
+bin-status=txt
