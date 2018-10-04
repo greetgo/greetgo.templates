@@ -38,7 +38,7 @@ public class DebugServer implements HasAfterInject {
   @Override
   public void afterInject() throws Exception {
     WebAppContext webAppServlet = new WebAppContext(
-      Modules.clientDir().toPath().resolve(".").toString(),
+      Modules.INSTANCE.clientDir().toPath().resolve(".").toString(),
 ///MODIFY replace sandbox {PROJECT_NAME}
       "/sandbox");
 

@@ -9,9 +9,9 @@ import java.io.File;
 
 public class LaunchModelConverter {
   public static void main(String[] args) throws Exception {
-    File sourceDir = Modules.clientDir().toPath()
+    File sourceDir = Modules.INSTANCE.clientDir().toPath()
       .resolve("src").toFile();
-    File destinationDir = Modules.controllerDir().toPath()
+    File destinationDir = Modules.INSTANCE.controllerDir().toPath()
       .resolve("src").toFile();
 ///MODIFY replace sandbox {PROJECT_NAME}
     String destinationPackage = "kz.greetgo.sandbox.controller.model";

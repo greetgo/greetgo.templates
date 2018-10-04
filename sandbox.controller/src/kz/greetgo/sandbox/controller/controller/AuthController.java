@@ -21,10 +21,6 @@ import kz.greetgo.sandbox.controller.security.PublicAccess;
 import kz.greetgo.sandbox.controller.util.Controller;
 import kz.greetgo.security.session.SessionIdentity;
 
-///MODIFY replace sandbox {PROJECT_NAME}
-///MODIFY replace Sandbox {PROJECT_CC_NAME}
-import static kz.greetgo.sandbox.controller.util.SandboxViews.G_SESSION;
-
 /**
  * как составлять контроллеры написано
  * <a href="https://github.com/greetgo/greetgo.mvc/blob/master/doc/controller_spec.md">здесь</a>
@@ -51,7 +47,7 @@ public class AuthController implements Controller {
 
     SessionIdentity identity = authRegister.get().login(username, password);
 
-    cookies.forName(G_SESSION)
+    cookies.forName("g-session")
       .path("/")
       .httpOnly(true)
       .maxAge(-1)
@@ -72,7 +68,7 @@ public class AuthController implements Controller {
   public void exit(@ParSession("sessionId") String sessionId, TunnelCookies cookies) {
     authRegister.get().deleteSession(sessionId);
 
-    cookies.forName(G_SESSION)
+    cookies.forName("g-session")
       .path("/")
       .remove();
   }

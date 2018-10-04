@@ -1,13 +1,11 @@
 ///MODIFY replace sandbox {PROJECT_NAME}
-package kz.greetgo.sandbox.register.dao;
+package kz.greetgo.sandbox.register.dao
 
 ///MODIFY replace sandbox {PROJECT_NAME}
-import kz.greetgo.sandbox.controller.model.PersonRecord;
-import org.apache.ibatis.annotations.Select;
+import kz.greetgo.sandbox.controller.model.PersonRecord
+import org.apache.ibatis.annotations.Select
 
-import java.util.List;
-
-public interface PersonDao {
+interface PersonDao {
   @Select("with cans as (\n" +
     "  select person_id, string_agg(user_can, ', ' order by user_can asc) as cans\n" +
     "  from person_cans\n" +
@@ -23,5 +21,5 @@ public interface PersonDao {
     "     left join cans pc on person_id = id\n" +
     "     where blocked = 0\n" +
     "     order by surname, name")
-  List<PersonRecord> list();
+  fun list(): List<PersonRecord>
 }
