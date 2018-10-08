@@ -33,7 +33,7 @@ class AuthRegisterImpl : AuthRegister {
 
   override fun login(username: String, password: String): SessionIdentity {
 
-    val personLogin = authDao.get().selectByUsername(username) ?: throw IllegalLoginOrPassword()
+    val personLogin: PersonLogin = authDao.get().selectByUsername(username) ?: throw IllegalLoginOrPassword()
 
     if (!passwordEncoder.get().verify(password, personLogin.encodedPassword)) {
       throw IllegalLoginOrPassword()
