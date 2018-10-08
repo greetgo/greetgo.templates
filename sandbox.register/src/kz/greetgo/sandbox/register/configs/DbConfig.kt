@@ -1,22 +1,22 @@
 ///MODIFY replace sandbox {PROJECT_NAME}
-package kz.greetgo.sandbox.register.configs;
+package kz.greetgo.sandbox.register.configs
 
 
-import kz.greetgo.conf.hot.DefaultStrValue;
-import kz.greetgo.conf.hot.Description;
+import kz.greetgo.conf.hot.DefaultStrValue
+import kz.greetgo.conf.hot.Description
 
 @Description("Параметры доступа к БД (используется только БД Postgresql)")
-public interface DbConfig {
+interface DbConfig {
 
   @Description("URL доступа к БД")
   @DefaultStrValue("jdbc:postgres:host:5432/db_name")
-  String url();
+  fun url(): String
 
   @Description("Пользователь для доступа к БД")
   @DefaultStrValue("Some_User")
-  String username();
+  fun username(): String
 
   @Description("Пароль для доступа к БД")
   @DefaultStrValue("Secret")
-  String password();
+  fun password(): String
 }
