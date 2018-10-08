@@ -16,8 +16,6 @@ import kz.greetgo.sandbox.controller.errors.JsonRestError
 ///MODIFY replace sandbox {PROJECT_NAME}
 import kz.greetgo.sandbox.controller.errors.RestError
 ///MODIFY replace sandbox {PROJECT_NAME}
-import kz.greetgo.sandbox.controller.model.SessionHolder
-///MODIFY replace sandbox {PROJECT_NAME}
 import kz.greetgo.sandbox.controller.register.AuthRegister
 ///MODIFY replace sandbox {PROJECT_NAME}
 import kz.greetgo.sandbox.controller.security.PublicAccess
@@ -25,7 +23,6 @@ import kz.greetgo.sandbox.controller.security.PublicAccess
 import kz.greetgo.sandbox.controller.security.SecurityError
 import org.apache.log4j.Logger
 
-import java.io.PrintWriter
 import java.lang.reflect.Method
 
 /**
@@ -153,11 +150,13 @@ abstract class SandboxViews : Views {
 
     //Проверяем параметры сессии на достоверность, и если всё ок, сохраняем в ThreadLocal-переменной сессию
     //Иначе очищаем ThreadLocal-переменную
-    authRegister!!.get().resetThreadLocalAndVerifySession(sessionId, token)
+    authRegister.get().resetThreadLocalAndVerifySession(sessionId, token)
 
     if (
 
-      methodInvoker.getMethodAnnotation<PublicAccess>(PublicAccess::class.java) == null && authRegister!!.get().session == null) {
+      methodInvoker.getMethodAnnotation<PublicAccess>(PublicAccess::class.java) == null
+
+      && authRegister.get().session == null) {
 
       throw SecurityError()
 
@@ -176,14 +175,14 @@ abstract class SandboxViews : Views {
     if ("personId" == context!!.parameterName()) {
       if (context.expectedReturnType() !== String::class.java) throw SecurityError("personId must be a string")
 
-      val sessionHolder = authRegister!!.get().session
+      val sessionHolder = authRegister.get().session
       return sessionHolder?.personId
     }
 
     if ("mode" == context.parameterName()) {
       if (context.expectedReturnType() !== String::class.java) throw SecurityError("personId must be a string")
 
-      val sessionHolder = authRegister!!.get().session
+      val sessionHolder = authRegister.get().session
       return sessionHolder?.mode
     }
 
@@ -234,13 +233,12 @@ abstract class SandboxViews : Views {
    */
   @Throws(Exception::class)
   private fun performError(methodInvoker: MethodInvoker, invokedResult: MethodInvokedResult) {
-    val error = invokedResult.error()
-    assert(error != null)
+    val error = invokedResult.error()!!
 
-    logger.error(error!!.message, error)
+    logger.error(error.message, error)
 
     val tunnel = methodInvoker.tunnel()
-    tunnel.requestAttributes().set("ERROR_TYPE", error.javaClass.getSimpleName())
+    tunnel.requestAttributes().set("ERROR_TYPE", error.javaClass.simpleName)
 
     if (error is JsonRestError) {
       tunnel.setResponseStatus(error.statusCode)
