@@ -61,6 +61,7 @@ subprojects {
 
     testCompile 'org.testng:testng:6.5.1'
     compile 'org.easytesting:fest-assert-core:2.0M10'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
   }
 
   tasks.withType(Javadoc) {
