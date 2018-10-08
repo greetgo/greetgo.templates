@@ -1,0 +1,1 @@
+rename-to=War{PROJECT_CC_NAME}Views.kt
