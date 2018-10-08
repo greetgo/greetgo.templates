@@ -46,7 +46,7 @@ public class DbWorker {
     recreateDb();
 
     liquibaseManager.get().apply();
-    App.do_not_run_liquibase_on_deploy_war().createNewFile();
+    App.INSTANCE.do_not_run_liquibase_on_deploy_war().createNewFile();
   }
 
   private final java.util.Set<String> alreadyRecreatedUsers = new HashSet<>();
@@ -106,7 +106,7 @@ public class DbWorker {
 
   public void cleanConfigsForTeamcity() {
     if (System.getProperty("user.name").startsWith("teamcity")) {
-      ServerUtil.deleteRecursively(App.appDir());
+      ServerUtil.deleteRecursively(App.INSTANCE.appDir());
     }
   }
 

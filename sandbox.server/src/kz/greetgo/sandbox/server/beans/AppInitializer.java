@@ -20,7 +20,7 @@ public class AppInitializer {
   public BeanGetter<Utf8AndTraceResetFilter> utf8AndTraceResetFilter;
 
   public void initialize(ServletContext ctx) throws Exception {
-    if (!App.do_not_run_liquibase_on_deploy_war().exists()) {
+    if (!App.INSTANCE.do_not_run_liquibase_on_deploy_war().exists()) {
       liquibaseManager.get().apply();
     }
 

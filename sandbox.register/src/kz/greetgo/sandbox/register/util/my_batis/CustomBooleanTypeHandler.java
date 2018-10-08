@@ -14,10 +14,11 @@ public class CustomBooleanTypeHandler extends BaseTypeHandler<Boolean> {
   @Override
   public void setNonNullParameter(PreparedStatement ps, int i, Boolean parameter, JdbcType jdbcType)
     throws SQLException {
-    if (parameter == null)
+    if (parameter == null) {
       ps.setNull(i, jdbcType.TYPE_CODE);
-    else
+    } else {
       ps.setInt(i, parameter ? 1 : 0);
+    }
   }
 
   @Override
