@@ -2,8 +2,6 @@
 package kz.greetgo.sandbox.debug.beans;
 
 import kz.greetgo.depinject.core.Bean;
-///MODIFY replace sandbox {PROJECT_NAME}
-///MODIFY replace Sandbox {PROJECT_CC_NAME}
 import kz.greetgo.sandbox.controller.util.SandboxViews;
 
 import java.io.File;
@@ -13,9 +11,12 @@ import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.toList;
 import static kz.greetgo.util.ServerUtil.streamToStr0;
+
+///MODIFY replace sandbox {PROJECT_NAME}
+///MODIFY replace Sandbox {PROJECT_CC_NAME}
 
 @Bean
 ///MODIFY replace Sandbox {PROJECT_CC_NAME}
@@ -55,28 +56,37 @@ public class DebugViews extends SandboxViews {
 
   private void readAndSleep() {
     try {
-      List<Long> times
-        = Arrays.stream(streamToStr0(new FileInputStream(config)).split("\n"))
-        .map(String::trim)
-        .filter(s -> !s.startsWith("#"))
-        .filter(s -> s.length() > 0)
-        .map(Long::parseLong)
-        .collect(Collectors.toList());
 
-      if (times.size() == 0) return;
+      List<Long> times =
+        Arrays.stream(streamToStr0(new FileInputStream(config)).split("\n"))
+          .map(String::trim)
+          .filter(s -> !s.startsWith("#"))
+          .filter(s -> s.length() > 0)
+          .map(Long::parseLong)
+          .collect(toList());
+
+      if (times.size() == 0) {
+        return;
+      }
 
       if (times.size() == 1) {
         sleepLong(times.get(0));
       } else {
         sleepLong(times.get(nextIndex.getAndIncrement() % times.size()));
       }
+
     } catch (Exception e) {
       throw new RuntimeException(e);
     }
   }
 
   private void sleepLong(long timeToSleep) throws InterruptedException {
-    if (timeToSleep <= 0) return;
+
+    if (timeToSleep <= 0) {
+      return;
+    }
+
     Thread.sleep(timeToSleep);
+
   }
 }
