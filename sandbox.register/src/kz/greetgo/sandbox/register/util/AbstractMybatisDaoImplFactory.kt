@@ -57,19 +57,17 @@ abstract class AbstractMybatisDaoImplFactory : BeanFactory {
     )
   }
 
-
   private inner class ImplInvocationHandler(internal val mapperInterface: Class<*>) : InvocationHandler {
 
     @Throws(Throwable::class)
-    override fun invoke(proxy: Any?, method: Method, args: Array<Any>): Any? {
+    override fun invoke(proxy: Any?, method: Method, args: Array<Any>?): Any? {
 
       if (Any::class.java == method.declaringClass) {
         try {
-          return method.invoke(this, *args)
+          return method.invoke(this, *(args ?: emptyArray()))
         } catch (t: Throwable) {
           throw ExceptionUtil.unwrapThrowable(t)
         }
-
       }
 
       val mapperMethod = cachedMapperMethod(method)

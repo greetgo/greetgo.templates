@@ -1,28 +1,24 @@
 ///MODIFY replace sandbox {PROJECT_NAME}
 package kz.greetgo.sandbox.controller.util
 
+///MODIFY replace sandbox {PROJECT_NAME}
+///MODIFY replace sandbox {PROJECT_NAME}
+///MODIFY replace sandbox {PROJECT_NAME}
+///MODIFY replace sandbox {PROJECT_NAME}
+///MODIFY replace sandbox {PROJECT_NAME}
+
 import com.fasterxml.jackson.databind.ObjectMapper
 import kz.greetgo.depinject.core.BeanGetter
 import kz.greetgo.mvc.annotations.ParSession
 import kz.greetgo.mvc.annotations.ToJson
 import kz.greetgo.mvc.annotations.ToXml
-import kz.greetgo.mvc.interfaces.MethodInvokedResult
-import kz.greetgo.mvc.interfaces.MethodInvoker
-import kz.greetgo.mvc.interfaces.RequestTunnel
-import kz.greetgo.mvc.interfaces.SessionParameterGetter
-import kz.greetgo.mvc.interfaces.Views
-///MODIFY replace sandbox {PROJECT_NAME}
+import kz.greetgo.mvc.interfaces.*
 import kz.greetgo.sandbox.controller.errors.JsonRestError
-///MODIFY replace sandbox {PROJECT_NAME}
 import kz.greetgo.sandbox.controller.errors.RestError
-///MODIFY replace sandbox {PROJECT_NAME}
 import kz.greetgo.sandbox.controller.register.AuthRegister
-///MODIFY replace sandbox {PROJECT_NAME}
 import kz.greetgo.sandbox.controller.security.PublicAccess
-///MODIFY replace sandbox {PROJECT_NAME}
 import kz.greetgo.sandbox.controller.security.SecurityError
 import org.apache.log4j.Logger
-
 import java.lang.reflect.Method
 
 /**
@@ -143,10 +139,10 @@ abstract class SandboxViews : Views {
    */
   private fun prepareSession(methodInvoker: MethodInvoker) {
     //Достаём токен из заголовка запроса. Если токена нет, то получим null
-    val token = methodInvoker.tunnel().requestHeaders().value("token")
+    val token: String? = methodInvoker.tunnel().requestHeaders().value("token")
 
     //Берём идентификатор сессии из кукисов. Если сессии нет, то получаем null
-    val sessionId = methodInvoker.tunnel().cookies().name("g-session").value()
+    val sessionId: String? = methodInvoker.tunnel().cookies().name("g-session").value()
 
     //Проверяем параметры сессии на достоверность, и если всё ок, сохраняем в ThreadLocal-переменной сессию
     //Иначе очищаем ThreadLocal-переменную
@@ -154,9 +150,11 @@ abstract class SandboxViews : Views {
 
     if (
 
-      methodInvoker.getMethodAnnotation<PublicAccess>(PublicAccess::class.java) == null
+      methodInvoker.getMethodAnnotation(PublicAccess::class.java) == null
 
-      && authRegister.get().session == null) {
+      && authRegister.get().getSessionHolder() == null
+
+    ) {
 
       throw SecurityError()
 
@@ -175,14 +173,14 @@ abstract class SandboxViews : Views {
     if ("personId" == context!!.parameterName()) {
       if (context.expectedReturnType() !== String::class.java) throw SecurityError("personId must be a string")
 
-      val sessionHolder = authRegister.get().session
+      val sessionHolder = authRegister.get().getSessionHolder()
       return sessionHolder?.personId
     }
 
     if ("mode" == context.parameterName()) {
       if (context.expectedReturnType() !== String::class.java) throw SecurityError("personId must be a string")
 
-      val sessionHolder = authRegister.get().session
+      val sessionHolder = authRegister.get().getSessionHolder()
       return sessionHolder?.mode
     }
 

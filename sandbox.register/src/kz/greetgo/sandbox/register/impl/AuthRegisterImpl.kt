@@ -44,7 +44,7 @@ class AuthRegisterImpl : AuthRegister {
     return sessionService.get().createSession(sessionHolder)
   }
 
-  override fun resetThreadLocalAndVerifySession(sessionId: String, token: String) {
+  override fun resetThreadLocalAndVerifySession(sessionId: String?, token: String?) {
     sessionDot.set(null)
 
     if (!sessionService.get().verifyId(sessionId)) {
@@ -58,7 +58,8 @@ class AuthRegisterImpl : AuthRegister {
     sessionDot.set(sessionService.get().getSessionData(sessionId))
   }
 
-  override fun getSession(): SessionHolder {
+
+  override fun getSessionHolder(): SessionHolder? {
     return sessionDot.get()
   }
 
