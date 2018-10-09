@@ -7,13 +7,11 @@ package kz.greetgo.sandbox.controller.errors
 class JsonRestError : RestError {
   val sendingAsJsonObject: Any?
 
-  constructor(sendingAsJsonObject: Any?)
-    : super(sendingAsJsonObject?.toString()) {
+  constructor(sendingAsJsonObject: Any?) : super(sendingAsJsonObject?.toString()) {
     this.sendingAsJsonObject = sendingAsJsonObject
   }
 
-  constructor(statusCode: Int, sendingAsJsonObject: Any?)
-    : super(statusCode, sendingAsJsonObject?.toString()) {
+  constructor(statusCode: Int, sendingAsJsonObject: Any?) : super(statusCode, sendingAsJsonObject?.toString()) {
     this.sendingAsJsonObject = sendingAsJsonObject
   }
 }

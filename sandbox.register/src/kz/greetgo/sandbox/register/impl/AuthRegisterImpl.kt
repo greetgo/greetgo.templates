@@ -31,7 +31,7 @@ class AuthRegisterImpl : AuthRegister {
 
   private val sessionDot = ThreadLocal<SessionHolder>()
 
-  override fun login(username: String, password: String): SessionIdentity {
+  override fun login(username: String, password: String?): SessionIdentity {
 
     val personLogin: PersonLogin = authDao.get().selectByUsername(username) ?: throw IllegalLoginOrPassword()
 

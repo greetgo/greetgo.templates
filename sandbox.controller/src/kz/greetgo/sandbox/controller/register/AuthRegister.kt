@@ -11,7 +11,7 @@ interface AuthRegister {
 
   fun getSessionHolder(): SessionHolder?
 
-  fun login(username: String, password: String): SessionIdentity
+  fun login(username: String, password: String?): SessionIdentity
 
   fun resetThreadLocalAndVerifySession(sessionId: String?, token: String?)
 

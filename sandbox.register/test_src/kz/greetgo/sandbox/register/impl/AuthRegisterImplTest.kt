@@ -112,13 +112,13 @@ class AuthRegisterImplTest : ParentTestNg() {
     //
     //
     authRegister.get().resetThreadLocalAndVerifySession(identity.id, identity.token)
-    val actual = authRegister.get().session
+    val actual = authRegister.get().getSessionHolder()
     //
     //
 
     assertThat(actual).isNotNull
-    assertThat(actual.personId).isEqualTo(sessionHolder.personId)
-    assertThat(actual.mode).isEqualTo(sessionHolder.mode)
+    assertThat(actual?.personId).isEqualTo(sessionHolder.personId)
+    assertThat(actual?.mode).isEqualTo(sessionHolder.mode)
   }
 
   @Test
@@ -129,7 +129,7 @@ class AuthRegisterImplTest : ParentTestNg() {
     //
     //
     authRegister.get().resetThreadLocalAndVerifySession(identity.id, RND.str(10))
-    val actual = authRegister.get().session
+    val actual = authRegister.get().getSessionHolder()
     //
     //
 
@@ -144,7 +144,7 @@ class AuthRegisterImplTest : ParentTestNg() {
     //
     //
     authRegister.get().resetThreadLocalAndVerifySession(identity.id, null)
-    val actual = authRegister.get().session
+    val actual = authRegister.get().getSessionHolder()
     //
     //
 
@@ -159,7 +159,7 @@ class AuthRegisterImplTest : ParentTestNg() {
     //
     //
     authRegister.get().resetThreadLocalAndVerifySession(identity.id, "")
-    val actual = authRegister.get().session
+    val actual = authRegister.get().getSessionHolder()
     //
     //
 
@@ -171,7 +171,7 @@ class AuthRegisterImplTest : ParentTestNg() {
     //
     //
     authRegister.get().resetThreadLocalAndVerifySession(RND.str(10), null)
-    val actual = authRegister.get().session
+    val actual = authRegister.get().getSessionHolder()
     //
     //
 

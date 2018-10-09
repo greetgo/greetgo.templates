@@ -15,6 +15,6 @@ open class RestError
 @JvmOverloads
 constructor(val statusCode: Int = 500, message: String? = null) : RuntimeException(message) {
 
-  constructor(message: String) : this(500, message)
+  constructor(message: String?) : this(500, message)
 
 }
