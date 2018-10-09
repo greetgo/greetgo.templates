@@ -4,7 +4,6 @@ package kz.greetgo.sandbox.register.util
 ///MODIFY replace sandbox {PROJECT_NAME}
 ///MODIFY replace sandbox {PROJECT_NAME}
 ///MODIFY replace sandbox {PROJECT_NAME}
-
 import kz.greetgo.db.DbProxyFactory
 import kz.greetgo.db.GreetgoTransactionManager
 import kz.greetgo.depinject.core.Bean
@@ -28,17 +27,23 @@ abstract class LocalSessionFactory : BeanReplacer, HasAfterInject, DataSourceGet
   private val transactionFactory = LocalTransactionFactory(transactionManager)
   private val dbProxyFactory = DbProxyFactory(transactionManager)
 
-  @get:Bean
 ///MODIFY replace Sandbox {PROJECT_CC_NAME}
-  var jdbcSandbox: JdbcSandbox? = null
-    private set
+  private lateinit var jdbcSandbox: JdbcSandbox
+
+  @Bean
+///MODIFY replace Sandbox {PROJECT_CC_NAME}
+  fun createJdbcSandbox(): JdbcSandbox {
+///MODIFY replace Sandbox {PROJECT_CC_NAME}
+    return jdbcSandbox
+  }
 
   private lateinit var sqlSessionFactory: SqlSessionFactory
 
   override lateinit var dataSource: DataSource
 
-  val configuration: Configuration
-    get() = sqlSessionFactory.configuration
+  fun getConfiguration(): Configuration {
+    return sqlSessionFactory.configuration
+  }
 
   override fun replaceBean(originalBean: Any, returnClass: Class<*>): Any {
 
@@ -50,12 +55,10 @@ abstract class LocalSessionFactory : BeanReplacer, HasAfterInject, DataSourceGet
 
   }
 
-  @Throws(Exception::class)
   protected abstract fun createDataSource(): DataSource
 
   protected abstract fun databaseEnvironmentId(): String
 
-  @Throws(Exception::class)
   override fun afterInject() {
     dataSource = createDataSource()
 
@@ -63,7 +66,9 @@ abstract class LocalSessionFactory : BeanReplacer, HasAfterInject, DataSourceGet
       val logger = Logger.getLogger("DIRECT_SQL")
 
       override fun logTrace(message: String) {
-        if (logger.isTraceEnabled) logger.trace(message)
+        if (logger.isTraceEnabled) {
+          logger.trace(message)
+        }
       }
     })
 

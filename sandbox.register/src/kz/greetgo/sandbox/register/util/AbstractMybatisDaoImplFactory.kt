@@ -15,9 +15,9 @@ import java.util.concurrent.ConcurrentHashMap
 
 abstract class AbstractMybatisDaoImplFactory : BeanFactory {
 
-  protected abstract val sqlSession: SqlSession
+  protected abstract fun getSqlSession(): SqlSession
 
-  protected abstract val configuration: Configuration
+  protected abstract fun getConfiguration(): Configuration
 
   private val cache = ConcurrentHashMap<Class<*>, Any>()
 
@@ -42,7 +42,7 @@ abstract class AbstractMybatisDaoImplFactory : BeanFactory {
   }
 
   private fun createBean0(beanClass: Class<*>): Any {
-    val configuration = configuration
+    val configuration = getConfiguration()
     configuration.addMapper(beanClass)
 
     run {
@@ -61,7 +61,7 @@ abstract class AbstractMybatisDaoImplFactory : BeanFactory {
   private inner class ImplInvocationHandler(internal val mapperInterface: Class<*>) : InvocationHandler {
 
     @Throws(Throwable::class)
-    override fun invoke(proxy: Any, method: Method, args: Array<Any>): Any {
+    override fun invoke(proxy: Any?, method: Method, args: Array<Any>): Any? {
 
       if (Any::class.java == method.declaringClass) {
         try {
@@ -75,8 +75,13 @@ abstract class AbstractMybatisDaoImplFactory : BeanFactory {
       val mapperMethod = cachedMapperMethod(method)
 
       try {
-        sqlSession.use { sqlSession -> return mapperMethod.execute(sqlSession, args) }
+
+        getSqlSession().use {
+          return mapperMethod.execute(it, args)
+        }
+
       } catch (t: Throwable) {
+        t.printStackTrace()
         throw ExceptionUtil.unwrapThrowable(t)
       }
 
@@ -93,7 +98,7 @@ abstract class AbstractMybatisDaoImplFactory : BeanFactory {
           if (mapperMethod != null) return mapperMethod
         }
         run {
-          val mapperMethod = MapperMethod(mapperInterface, method, sqlSession.configuration)
+          val mapperMethod = MapperMethod(mapperInterface, method, getSqlSession().configuration)
           methodCache[method] = mapperMethod
           return mapperMethod
         }

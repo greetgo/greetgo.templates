@@ -19,7 +19,7 @@ class LocalTransactionFactory(private val transactionManager: TransactionManager
   }
 
   override fun newTransaction(dataSource: DataSource,
-                              level: TransactionIsolationLevel,
+                              level: TransactionIsolationLevel?,
                               autoCommit: Boolean): Transaction {
 
     return object : Transaction {

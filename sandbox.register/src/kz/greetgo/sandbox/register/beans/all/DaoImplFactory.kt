@@ -13,9 +13,11 @@ class DaoImplFactory : AbstractMybatisDaoImplFactory() {
 
   lateinit var dbSessionFactory: BeanGetter<DbSessionFactory>
 
-  override val sqlSession: SqlSession
-    get() = dbSessionFactory.get().sqlSession()
+  override fun getSqlSession(): SqlSession {
+    return dbSessionFactory.get().sqlSession()
+  }
 
-  override val configuration: Configuration
-    get() = dbSessionFactory.get().configuration
+  override fun getConfiguration(): Configuration {
+    return dbSessionFactory.get().getConfiguration()
+  }
 }
