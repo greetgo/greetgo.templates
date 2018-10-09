@@ -53,7 +53,7 @@ public class DbWorker {
 
   private void recreateDb() throws Exception {
 
-    final String dbName = DbUrlUtils.extractDbName(postgresDbConfig.get().url());
+    final String dbName = DbUrlUtils.INSTANCE.extractDbName(postgresDbConfig.get().url());
     final String username = postgresDbConfig.get().username();
     final String password = postgresDbConfig.get().password();
 
