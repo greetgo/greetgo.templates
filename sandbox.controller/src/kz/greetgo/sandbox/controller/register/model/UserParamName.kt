@@ -1,6 +1,6 @@
 ///MODIFY replace sandbox {PROJECT_NAME}
-package kz.greetgo.sandbox.controller.register.model;
+package kz.greetgo.sandbox.controller.register.model
 
-public enum UserParamName {
+enum class UserParamName {
   CurrentOrgUnitRootId, SelectedMainTabId
 }
