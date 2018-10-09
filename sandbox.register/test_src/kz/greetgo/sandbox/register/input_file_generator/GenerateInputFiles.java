@@ -35,6 +35,7 @@ public class GenerateInputFiles {
     new GenerateInputFiles().execute();
   }
 
+  @SuppressWarnings("SpellCheckingInspection")
   private static final String ENG = "abcdefghijklmnopqrstuvwxyz";
   private static final String DEG = "0123456789";
 

@@ -1,31 +1,30 @@
 ///MODIFY replace sandbox {PROJECT_NAME}
-package kz.greetgo.sandbox.register._develop_;
+package kz.greetgo.sandbox.register._develop_
 
 ///MODIFY replace sandbox {PROJECT_NAME}
-import kz.greetgo.sandbox.register.test.util.TestsBeanContainer;
-///MODIFY replace sandbox {PROJECT_NAME}
-import kz.greetgo.sandbox.register.test.util.TestsBeanContainerCreator;
+import kz.greetgo.sandbox.register.test.util.TestsBeanContainerCreator
 
 /**
- * <p>
+ *
+ *
  * see --> Инициация приложения на рабочем месте разработчика c загрйзкой в БД тестовых данных из стэнда
- * </p>
- * <p>
+ *
+ *
+ *
  * Этот скрипт запускается для иницииации приложения: здесь автоматически настраиваются конфиги и инициируется БД
- * </p>
- * <p>
+ *
+ *
+ *
  * Также этот скрипт загружает в БД тестовые данные из стэнда
- * </p>
+ *
  */
-public class RecreateDbAndLoadTestData {
-  public static void main(String[] args) throws Exception {
-    new RecreateDbAndLoadTestData().run();
-  }
+object RecreateDbAndLoadTestData {
+  @Throws(Exception::class)
+  @JvmStatic
+  fun main(args: Array<String>) {
+    val bc = TestsBeanContainerCreator.create()
 
-  private void run() throws Exception {
-    TestsBeanContainer bc = TestsBeanContainerCreator.create();
-
-    bc.dbWorker().recreateAll();
-    bc.dbLoader().loadTestData();
+    bc.dbWorker().recreateAll()
+    bc.dbLoader().loadTestData()
   }
 }
