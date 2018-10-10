@@ -1,16 +1,16 @@
 ///MODIFY replace sandbox {PROJECT_NAME}
 package kz.greetgo.sandbox.register.util
 
-///MODIFY replace sandbox {PROJECT_NAME}
-///MODIFY replace sandbox {PROJECT_NAME}
-///MODIFY replace sandbox {PROJECT_NAME}
 import kz.greetgo.db.DbProxyFactory
 import kz.greetgo.db.GreetgoTransactionManager
 import kz.greetgo.depinject.core.Bean
 import kz.greetgo.depinject.core.HasAfterInject
 import kz.greetgo.depinject.core.replace.BeanReplacer
+///MODIFY replace sandbox {PROJECT_NAME}
 import kz.greetgo.sandbox.controller.model.UserCan
+///MODIFY replace sandbox {PROJECT_NAME}
 import kz.greetgo.sandbox.register.util.my_batis.CustomBooleanTypeHandler
+///MODIFY replace sandbox {PROJECT_NAME}
 import kz.greetgo.sandbox.register.util.my_batis.CustomEnumTypeHandler
 import org.apache.ibatis.logging.log4j.Log4jImpl
 import org.apache.ibatis.mapping.Environment
