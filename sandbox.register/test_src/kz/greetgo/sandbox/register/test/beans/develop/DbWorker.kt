@@ -38,13 +38,11 @@ class DbWorker {
   private val alreadyRecreatedUsers = HashSet<String>()
 
   val postgresAdminConnection: Connection
-    @Throws(Exception::class)
     get() {
       Class.forName("org.postgresql.Driver")
       return DriverManager.getConnection(pgAdminUrl(), pgAdminUserid(), pgAdminPassword())
     }
 
-  @Throws(Exception::class)
   fun recreateAll() {
     prepareDbConfig()
     recreateDb()
@@ -53,7 +51,6 @@ class DbWorker {
     App.do_not_run_liquibase_on_deploy_war().createNewFile()
   }
 
-  @Throws(Exception::class)
   private fun recreateDb() {
 
     val dbName = DbUrlUtils.extractDbName(postgresDbConfig.get().url())
@@ -91,9 +88,9 @@ class DbWorker {
           }
         } catch (e: PSQLException) {
           val sem = e.serverErrorMessage
-          if ("CreateRole" == sem.routine) {
-            throw RuntimeException("Невозможно создать пользователя " + username + ". Возможно кто-то" +
-              " приконектился к базе данных под этим пользователем и поэтому он не удаляется." +
+          if (sem.routine == "CreateRole") {
+            throw RuntimeException("Невозможно создать пользователя $username. Возможно кто-то" +
+              " приконектился к базе данных под этим пользователем и поэтому не удаляется." +
               " Попробуйте разорвать коннект с БД или перезапустить БД. После повторите операцию снова", e)
           }
 
@@ -120,7 +117,6 @@ class DbWorker {
     }
   }
 
-  @Throws(Exception::class)
   private fun prepareDbConfig() {
     val file = allPostgresConfigFactory.get().storageFileFor(DbConfig::class.java)
 
@@ -133,7 +129,6 @@ class DbWorker {
     }
   }
 
-  @Throws(Exception::class)
   private fun writeDbConfigFile() {
     val file = allPostgresConfigFactory.get().storageFileFor(DbConfig::class.java)
     PrintStream(file, "UTF-8").use { out ->

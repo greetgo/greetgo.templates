@@ -17,14 +17,12 @@ import java.text.SimpleDateFormat
 
 @Bean
 class DbLoader {
-  internal val logger = Logger.getLogger(javaClass)
-
+  val logger: Logger = Logger.getLogger(javaClass) ?: throw RuntimeException()
 
   lateinit var authTestDao: BeanGetter<AuthTestDao>
   lateinit var idGenerator: BeanGetter<IdGenerator>
   lateinit var passwordEncoder: BeanGetter<PasswordEncoder>
 
-  @Throws(Exception::class)
   fun loadTestData() {
 
     loadPersons()
@@ -32,7 +30,6 @@ class DbLoader {
     logger.info("FINISH")
   }
 
-  @Throws(Exception::class)
   private fun loadPersons() {
     logger.info("Start loading persons...")
 
@@ -53,7 +50,6 @@ class DbLoader {
     logger.info("Finish loading persons")
   }
 
-  @Throws(Exception::class)
   private fun user(fioStr: String, birthDateStr: String, accountName: String) {
     val id = idGenerator.get().newId()
     val fio = fioStr.split("\\s+".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()

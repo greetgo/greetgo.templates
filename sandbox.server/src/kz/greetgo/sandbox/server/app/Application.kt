@@ -11,21 +11,12 @@ class Application : ServletContainerInitializer {
 
   @Throws(ServletException::class)
   override fun onStartup(c: Set<Class<*>>?, servletContext: ServletContext) {
-    try {
 
-      val beanContainer = Depinject.newInstance(ApplicationBeanContainer::class.java)
+    val beanContainer = Depinject.newInstance(ApplicationBeanContainer::class.java)
 
-      val appInitializer = beanContainer.appInitializer()
+    val appInitializer = beanContainer.appInitializer()
 
-      appInitializer.initialize(servletContext)
-
-    } catch (e: RuntimeException) {
-      throw e
-    } catch (e: ServletException) {
-      throw e
-    } catch (e: Exception) {
-      throw RuntimeException(e)
-    }
+    appInitializer.initialize(servletContext)
 
   }
 }

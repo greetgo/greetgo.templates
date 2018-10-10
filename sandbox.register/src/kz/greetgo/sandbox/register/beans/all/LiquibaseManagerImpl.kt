@@ -18,7 +18,6 @@ class LiquibaseManagerImpl : LiquibaseManager {
 
   lateinit var dbConfig: BeanGetter<DbConfig>
 
-  @Throws(Exception::class)
   override fun apply() {
 
     Class.forName("org.postgresql.Driver")
