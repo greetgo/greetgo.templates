@@ -1,1 +1,1 @@
-rename-to={PROJECT_CC_NAME}Views.tk
+rename-to={PROJECT_CC_NAME}Views.kt

@@ -29,6 +29,7 @@ abstract class SandboxViews : Views {
 
   lateinit var authRegister: BeanGetter<AuthRegister>
 
+///MODIFY replace Sandbox {PROJECT_CC_NAME}
   private val logger = Logger.getLogger(SandboxViews::class.qualifiedName)
 
   /**
@@ -38,14 +39,11 @@ abstract class SandboxViews : Views {
    * @param tunnel это тунель запроса (через него можно управлять процессом запроса)
    * @param method ссылка на метод контроллера, который был только-что вызван
    * @return эта строка будет отправлена в качестве тела ответа на запрос, зашифрованной в кодировке UTF-8.
-   * @throws Exception нужно чтобы не ставить надоедливые try/catch-блоки
    */
-  @Throws(Exception::class)
   override fun toJson(`object`: Any?, tunnel: RequestTunnel?, method: Method?): String? {
     return convertToJson(`object`)
   }
 
-  @Throws(Exception::class)
   private fun convertToJson(`object`: Any?): String? {
     return if (`object` == null) null else objectMapper.writer().writeValueAsString(`object`)
   }
@@ -57,9 +55,7 @@ abstract class SandboxViews : Views {
    * @param tunnel это тунель запроса (через него можно управлять процессом запроса)
    * @param method ссылка на метод контроллера, который был только-что вызван
    * @return эта строка будет отправлена в качестве тела ответа на запрос, зашифрованной в кодировке UTF-8.
-   * @throws Exception нужно чтобы не ставить надоедливые try/catch-блоки
    */
-  @Throws(Exception::class)
   override fun toXml(`object`: Any?, tunnel: RequestTunnel?, method: Method?): String {
     //Здесь нужно object преобразовать в XML и вернуть
     //Здесь аннотация ToXml не работает
@@ -75,9 +71,7 @@ abstract class SandboxViews : Views {
    * необходимое для вызова метода контроллера,
    * и для изучения вызываемого метода контроллера. Например можно посмотреть какие аннотации есть
    * у метода и провести дополнительные манипуляции.
-   * @throws Exception нужно чтобы не ставить надоедливые try/catch-блоки
    */
-  @Throws(Exception::class)
   override fun performRequest(methodInvoker: MethodInvoker) {
 
     //вызываем этот метод, чтобы в дальнейшем можно было получить момент непосредственно перед вызовом метода контроллера
@@ -115,19 +109,13 @@ abstract class SandboxViews : Views {
   /**
    * Этот метод вызывается всегда перед вызовом метода контроллера, но уже после проверки безопасности.
    * Если проверка безопасности не прошла, то этот метод не вызывается
-   *
-   * @throws Exception нужно чтобы не ставить надоедливые try/catch-блоки
    */
-  @Throws(Exception::class)
   private fun beforeRequestWithSession() {
   }
 
   /**
    * Этот метод вызывается всегда перед вызовом метода контроллера
-   *
-   * @throws Exception нужно чтобы не ставить надоедливые try/catch-блоки
    */
-  @Throws(Exception::class)
   protected open fun beforeRequest() {
   }
 
