@@ -31,25 +31,30 @@ public class CustomEnumTypeHandler<E extends Enum<E>> extends BaseTypeHandler<E>
 
   @Override
   public E getNullableResult(ResultSet rs, String columnName) throws SQLException {
-    return valueOf(type, rs.getString(columnName));
+    return valueOfOrNull(rs.getString(columnName));
   }
 
-  private static <E extends Enum<E>> E valueOf(Class<E> type, String str) {
-    if (str == null) return null;
+  @Override
+  public E getNullableResult(ResultSet rs, int columnIndex) throws SQLException {
+    return valueOfOrNull(rs.getString(columnIndex));
+  }
+
+  @Override
+  public E getNullableResult(CallableStatement cs, int columnIndex) throws SQLException {
+    return valueOfOrNull(cs.getString(columnIndex));
+  }
+
+  private E valueOfOrNull(String str) {
+
+    if (str == null) {
+      return null;
+    }
+
     try {
       return Enum.valueOf(type, str);
     } catch (IllegalArgumentException e) {
       return null;
     }
-  }
 
-  @Override
-  public E getNullableResult(ResultSet rs, int columnIndex) throws SQLException {
-    return valueOf(type, rs.getString(columnIndex));
-  }
-
-  @Override
-  public E getNullableResult(CallableStatement cs, int columnIndex) throws SQLException {
-    return valueOf(type, cs.getString(columnIndex));
   }
 }
