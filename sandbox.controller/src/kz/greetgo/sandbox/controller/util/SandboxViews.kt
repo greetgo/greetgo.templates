@@ -1,22 +1,21 @@
 ///MODIFY replace sandbox {PROJECT_NAME}
 package kz.greetgo.sandbox.controller.util
 
-///MODIFY replace sandbox {PROJECT_NAME}
-///MODIFY replace sandbox {PROJECT_NAME}
-///MODIFY replace sandbox {PROJECT_NAME}
-///MODIFY replace sandbox {PROJECT_NAME}
-///MODIFY replace sandbox {PROJECT_NAME}
-
 import com.fasterxml.jackson.databind.ObjectMapper
 import kz.greetgo.depinject.core.BeanGetter
 import kz.greetgo.mvc.annotations.ParSession
 import kz.greetgo.mvc.annotations.ToJson
 import kz.greetgo.mvc.annotations.ToXml
 import kz.greetgo.mvc.interfaces.*
+///MODIFY replace sandbox {PROJECT_NAME}
 import kz.greetgo.sandbox.controller.errors.JsonRestError
+///MODIFY replace sandbox {PROJECT_NAME}
 import kz.greetgo.sandbox.controller.errors.RestError
+///MODIFY replace sandbox {PROJECT_NAME}
 import kz.greetgo.sandbox.controller.register.AuthRegister
+///MODIFY replace sandbox {PROJECT_NAME}
 import kz.greetgo.sandbox.controller.security.PublicAccess
+///MODIFY replace sandbox {PROJECT_NAME}
 import kz.greetgo.sandbox.controller.security.SecurityError
 import org.apache.log4j.Logger
 import java.lang.reflect.Method
