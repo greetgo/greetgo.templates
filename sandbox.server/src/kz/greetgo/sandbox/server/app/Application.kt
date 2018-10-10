@@ -10,7 +10,7 @@ import javax.servlet.ServletException
 class Application : ServletContainerInitializer {
 
   @Throws(ServletException::class)
-  override fun onStartup(c: Set<Class<*>>, servletContext: ServletContext) {
+  override fun onStartup(c: Set<Class<*>>?, servletContext: ServletContext) {
     try {
 
       val beanContainer = Depinject.newInstance(ApplicationBeanContainer::class.java)
