@@ -10,7 +10,6 @@ import kz.greetgo.sandbox.register.test.util.TestsBeanContainerCreator
  * Этот скрипт запускается для иницииации приложения: здесь автоматически настраиваются конфиги и инициируется БД
  */
 object RecreateDb {
-  @Throws(Exception::class)
   @JvmStatic
   fun main(args: Array<String>) {
     val bc = TestsBeanContainerCreator.create()

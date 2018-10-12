@@ -3,7 +3,6 @@ package kz.greetgo.sandbox.server.beans
 
 import kz.greetgo.depinject.core.Bean
 import kz.greetgo.depinject.core.BeanGetter
-import kz.greetgo.mvc.builder.ExecDefinition
 import kz.greetgo.mvc.interfaces.Views
 import kz.greetgo.mvc.model.UploadInfo
 import kz.greetgo.mvc.war.AppServlet

@@ -22,7 +22,6 @@ class DebugServer : HasAfterInject {
 
   lateinit var webAppContextRegistrations: BeanGetter<List<WebAppContextRegistration>>
 
-  @Throws(Exception::class)
   fun start(): DebugServer {
     server.start()
 ///MODIFY replace sandbox {PROJECT_NAME}
@@ -33,12 +32,10 @@ class DebugServer : HasAfterInject {
     return this
   }
 
-  @Throws(InterruptedException::class)
   fun join() {
     server.join()
   }
 
-  @Throws(Exception::class)
   override fun afterInject() {
     val webAppServlet = WebAppContext(
       Modules.clientDir().toPath().resolve(".").toString(),

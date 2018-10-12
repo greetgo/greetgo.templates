@@ -26,12 +26,10 @@ class MyLog4jLayout : org.apache.log4j.Layout() {
     run {
       val level = event.getLevel().toString()
       val levelLength = level.length
-      if (levelLength == 5) {
-        buffer.append(' ').append(level)
-      } else if (levelLength == 4) {
-        buffer.append("  ").append(level)
-      } else {
-        buffer.append(' ').append(level)
+      when (levelLength) {
+        5 -> buffer.append(' ').append(level)
+        4 -> buffer.append("  ").append(level)
+        else -> buffer.append(' ').append(level)
       }
 
     }

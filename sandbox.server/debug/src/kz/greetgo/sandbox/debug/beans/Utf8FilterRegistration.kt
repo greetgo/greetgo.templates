@@ -28,15 +28,13 @@ class Utf8FilterRegistration : WebAppContextRegistration, Filter {
     return -200.0
   }
 
-  @Throws(ServletException::class)
-  override fun init(filterConfig: FilterConfig) {
-  }
+  override fun init(filterConfig: FilterConfig) {}
 
-  @Throws(IOException::class, ServletException::class)
   override fun doFilter(request: ServletRequest, response: ServletResponse, chain: FilterChain) {
 
     request.characterEncoding = "UTF-8"
     response.characterEncoding = "UTF-8"
+
     chain.doFilter(request, response)
 
   }

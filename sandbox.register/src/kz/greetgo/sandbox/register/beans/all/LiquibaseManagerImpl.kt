@@ -27,6 +27,7 @@ class LiquibaseManagerImpl : LiquibaseManager {
       dbConfig.get().username(),
       dbConfig.get().password()
     ).use { connection ->
+
       val database = PostgresDatabase()
 
       database.connection = JdbcConnection(connection)
@@ -35,6 +36,7 @@ class LiquibaseManagerImpl : LiquibaseManager {
         "liquibase/postgres/changelog-master.xml",
         ClassLoaderResourceAccessor(), database
       ).update("")
+
     }
   }
 }

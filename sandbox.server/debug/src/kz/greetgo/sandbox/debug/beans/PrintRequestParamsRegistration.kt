@@ -16,7 +16,6 @@ import javax.servlet.ServletRequest
 import javax.servlet.ServletResponse
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
-import java.io.IOException
 import java.util.EnumSet
 
 @Bean
@@ -30,14 +29,10 @@ class PrintRequestParamsRegistration : WebAppContextRegistration, Filter {
     return -190.0
   }
 
-  @Throws(ServletException::class)
-  override fun init(filterConfig: FilterConfig) {
-  }
+  override fun init(filterConfig: FilterConfig) {}
 
   override fun destroy() {}
 
-
-  @Throws(IOException::class, ServletException::class)
   override fun doFilter(servletRequest: ServletRequest, servletResponse: ServletResponse, filterChain: FilterChain) {
     if (servletRequest !is HttpServletRequest || servletResponse !is HttpServletResponse) {
       throw ServletException(javaClass.simpleName + " can work only with HTTP protocol")

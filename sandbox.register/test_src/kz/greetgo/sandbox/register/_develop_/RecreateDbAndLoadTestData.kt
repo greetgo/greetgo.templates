@@ -12,7 +12,6 @@ import kz.greetgo.sandbox.register.test.util.TestsBeanContainerCreator
  * Также этот скрипт загружает в БД тестовые данные из стэнда
  */
 object RecreateDbAndLoadTestData {
-  @Throws(Exception::class)
   @JvmStatic
   fun main(args: Array<String>) {
     val bc = TestsBeanContainerCreator.create()

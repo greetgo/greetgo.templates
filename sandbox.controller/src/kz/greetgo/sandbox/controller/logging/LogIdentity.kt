@@ -39,26 +39,32 @@ object LogIdentity {
     run {
       val id = threadId.get()
       buf.append(",THREAD:000000")
-      if (id < 10) {
-        buf.append(id)
-      } else if (id < 100) {
-        buf.setLength(buf.length - 1)
-        buf.append(id)
-      } else if (id < 1000) {
-        buf.setLength(buf.length - 2)
-        buf.append(id)
-      } else if (id < 10000) {
-        buf.setLength(buf.length - 3)
-        buf.append(id)
-      } else if (id < 100000) {
-        buf.setLength(buf.length - 4)
-        buf.append(id)
-      } else if (id < 1000000) {
-        buf.setLength(buf.length - 5)
-        buf.append(id)
-      } else {
-        buf.setLength(buf.length - 6)
-        buf.append(id)
+      when {
+        id < 10 -> buf.append(id)
+        id < 100 -> {
+          buf.setLength(buf.length - 1)
+          buf.append(id)
+        }
+        id < 1000 -> {
+          buf.setLength(buf.length - 2)
+          buf.append(id)
+        }
+        id < 10000 -> {
+          buf.setLength(buf.length - 3)
+          buf.append(id)
+        }
+        id < 100000 -> {
+          buf.setLength(buf.length - 4)
+          buf.append(id)
+        }
+        id < 1000000 -> {
+          buf.setLength(buf.length - 5)
+          buf.append(id)
+        }
+        else -> {
+          buf.setLength(buf.length - 6)
+          buf.append(id)
+        }
       }
     }
   }

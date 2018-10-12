@@ -110,14 +110,12 @@ abstract class SandboxViews : Views {
    * Этот метод вызывается всегда перед вызовом метода контроллера, но уже после проверки безопасности.
    * Если проверка безопасности не прошла, то этот метод не вызывается
    */
-  private fun beforeRequestWithSession() {
-  }
+  private fun beforeRequestWithSession() {}
 
   /**
    * Этот метод вызывается всегда перед вызовом метода контроллера
    */
-  protected open fun beforeRequest() {
-  }
+  protected open fun beforeRequest() {}
 
   /**
    * Осуществляет подготовку сессии и сохранения её в LocalThread-переменной.

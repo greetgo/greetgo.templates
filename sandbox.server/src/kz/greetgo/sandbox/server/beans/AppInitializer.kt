@@ -19,7 +19,6 @@ class AppInitializer {
 
   lateinit var utf8AndTraceResetFilter: BeanGetter<Utf8AndTraceResetFilter>
 
-  @Throws(Exception::class)
   fun initialize(ctx: ServletContext) {
     if (!App.do_not_run_liquibase_on_deploy_war().exists()) {
       liquibaseManager.get().apply()
