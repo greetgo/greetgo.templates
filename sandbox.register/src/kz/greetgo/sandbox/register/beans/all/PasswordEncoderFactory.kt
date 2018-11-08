@@ -10,7 +10,7 @@ import kz.greetgo.security.SecurityBuilders.newPasswordEncoderBuilder
 class PasswordEncoderFactory {
   @Bean
   fun createPasswordEncoder(): PasswordEncoder {
-///MODIFY replace h2h3j4j5hn6b6h5j43k3 RND_SALT
+///MODIFY replace h2h3j4j5hn6b6h5j43k3 {RND_SALT}
     return newPasswordEncoderBuilder().setSalt("h2h3j4j5hn6b6h5j43k3").build()
   }
 }
