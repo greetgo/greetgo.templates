@@ -4,4 +4,4 @@
 ///MODIFY replace SandBox {PROJECT_CC_NAME}
 SandBox from greetgo!
 
-Created from template: t-depinject-angular-v001
+Created from template: t-depinject-angular-java
