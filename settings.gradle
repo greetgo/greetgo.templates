@@ -1,5 +1,5 @@
-///MODIFY replace sandbox {PROJECT_NAME}
-rootProject.name = "greetgo.sandbox.root"
+///MODIFY replace templates {PROJECT_NAME}
+rootProject.name = "greetgo.templates"
 
 ///MODIFY replace sandbox {PROJECT_NAME}
 include 'sandbox.client'
