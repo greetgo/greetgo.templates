@@ -3,3 +3,5 @@
 
 ///MODIFY replace SandBox {PROJECT_CC_NAME}
 SandBox from greetgo!
+
+Created from template: t-depinject-angular-kotlin
