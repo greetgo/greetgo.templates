@@ -34,19 +34,19 @@ public abstract class LocalSessionFactory implements BeanReplacer, HasAfterInjec
   @Override
   public Object replaceBean(Object originalBean, Class<?> returnClass) {
 
-    if (!returnClass.isInterface()) return originalBean;
+    if (!returnClass.isInterface()) { return originalBean; }
 
     return dbProxyFactory.createProxyFor(originalBean, returnClass);
   }
 
   @Bean
-///MODIFY replace Sandbox {PROJECT_CC_NAME}
+  ///MODIFY replace Sandbox {PROJECT_CC_NAME}
   public JdbcSandbox getJdbcSandbox() {
-///MODIFY replace Sandbox {PROJECT_CC_NAME}
+    ///MODIFY replace Sandbox {PROJECT_CC_NAME}
     return jdbcSandbox;
   }
 
-///MODIFY replace Sandbox {PROJECT_CC_NAME}
+  ///MODIFY replace Sandbox {PROJECT_CC_NAME}
   private JdbcSandbox jdbcSandbox = null;
 
   private SqlSessionFactory sqlSessionFactory = null;
@@ -66,16 +66,16 @@ public abstract class LocalSessionFactory implements BeanReplacer, HasAfterInjec
   public void afterInject() throws Exception {
     dataSource = createDataSource();
 
-//    dataSource = DbLoggingProxyFactory.create(dataSource, new DbLoggingProxyFactory.AbstractSqlViewer() {
-//      final Logger logger = Logger.getLogger("DIRECT_SQL");
-//
-//      @Override
-//      protected void logTrace(String message) {
-//        if (logger.isTraceEnabled()) logger.trace(message);
-//      }
-//    });
+    dataSource = DbLoggingProxyFactory.create(dataSource, new DbLoggingProxyFactory.AbstractSqlViewer() {
+      final Logger logger = Logger.getLogger("DIRECT_SQL");
 
-///MODIFY replace Sandbox {PROJECT_CC_NAME}
+      @Override
+      protected void logTrace(String message) {
+        if (logger.isTraceEnabled()) { logger.trace(message); }
+      }
+    });
+
+    ///MODIFY replace Sandbox {PROJECT_CC_NAME}
     jdbcSandbox = new JdbcSandbox(dataSource, transactionManager);
 
     Environment environment = new Environment(databaseEnvironmentId(), transactionFactory, dataSource);
