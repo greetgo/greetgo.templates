@@ -62,15 +62,15 @@ abstract class LocalSessionFactory : BeanReplacer, HasAfterInject, DataSourceGet
   override fun afterInject() {
     dataSource = createDataSource()
 
-    dataSource = DbLoggingProxyFactory.create(dataSource, object : DbLoggingProxyFactory.AbstractSqlViewer() {
-      val logger = Logger.getLogger("DIRECT_SQL")
-
-      override fun logTrace(message: String) {
-        if (logger.isTraceEnabled) {
-          logger.trace(message)
-        }
-      }
-    })
+//    dataSource = DbLoggingProxyFactory.create(dataSource, object : DbLoggingProxyFactory.AbstractSqlViewer() {
+//      val logger = Logger.getLogger("DIRECT_SQL")
+//
+//      override fun logTrace(message: String) {
+//        if (logger.isTraceEnabled) {
+//          logger.trace(message)
+//        }
+//      }
+//    })
 
 ///MODIFY replace Sandbox {PROJECT_CC_NAME}
     jdbcSandbox = JdbcSandbox(dataSource, transactionManager)
