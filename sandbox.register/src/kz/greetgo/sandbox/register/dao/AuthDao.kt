@@ -18,5 +18,5 @@ interface AuthDao {
   fun loadDisplayPerson(@Param("personId") personId: String): PersonDisplay?
 
   @Select("select user_can from person_cans where person_id = #{personId}")
-  fun loadCans(personId: String): List<UserCan>
+  fun loadCans(personId: String): List<UserCan?>
 }

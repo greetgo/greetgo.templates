@@ -66,7 +66,7 @@ class AuthRegisterImpl : AuthRegister {
   override fun displayPerson(personId: String): PersonDisplay {
     val ret = authDao.get().loadDisplayPerson(personId) ?: throw NullPointerException("No person with id = $personId")
 
-    ret.cans = authDao.get().loadCans(personId)
+    ret.cans = authDao.get().loadCans(personId).filter { it != null }
 
     return ret
   }
