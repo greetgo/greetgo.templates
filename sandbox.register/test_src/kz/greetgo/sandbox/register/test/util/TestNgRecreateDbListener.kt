@@ -8,7 +8,7 @@ class TestNgRecreateDbListener : ISuiteListener {
   override fun onFinish(suite: ISuite) {}
 
   override fun onStart(suite: ISuite) {
-    if (suite.name != "All StandDb Test Suite") {
+    if (suite.name != "All Db Test Suite") {
       return
     }
 

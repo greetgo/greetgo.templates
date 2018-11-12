@@ -27,13 +27,13 @@ abstract class LocalSessionFactory : BeanReplacer, HasAfterInject, DataSourceGet
   private val transactionFactory = LocalTransactionFactory(transactionManager)
   private val dbProxyFactory = DbProxyFactory(transactionManager)
 
-///MODIFY replace Sandbox {PROJECT_CC_NAME}
+  ///MODIFY replace Sandbox {PROJECT_CC_NAME}
   private lateinit var jdbcSandbox: JdbcSandbox
 
   @Bean
-///MODIFY replace Sandbox {PROJECT_CC_NAME}
+  ///MODIFY replace Sandbox {PROJECT_CC_NAME}
   fun createJdbcSandbox(): JdbcSandbox {
-///MODIFY replace Sandbox {PROJECT_CC_NAME}
+    ///MODIFY replace Sandbox {PROJECT_CC_NAME}
     return jdbcSandbox
   }
 
@@ -62,17 +62,17 @@ abstract class LocalSessionFactory : BeanReplacer, HasAfterInject, DataSourceGet
   override fun afterInject() {
     dataSource = createDataSource()
 
-//    dataSource = DbLoggingProxyFactory.create(dataSource, object : DbLoggingProxyFactory.AbstractSqlViewer() {
-//      val logger = Logger.getLogger("DIRECT_SQL")
-//
-//      override fun logTrace(message: String) {
-//        if (logger.isTraceEnabled) {
-//          logger.trace(message)
-//        }
-//      }
-//    })
+    dataSource = DbLoggingProxyFactory.create(dataSource, object : DbLoggingProxyFactory.AbstractSqlViewer() {
+      val logger = Logger.getLogger("DIRECT_SQL")
 
-///MODIFY replace Sandbox {PROJECT_CC_NAME}
+      override fun logTrace(message: String) {
+        if (logger.isTraceEnabled) {
+          logger.trace(message)
+        }
+      }
+    })
+
+    ///MODIFY replace Sandbox {PROJECT_CC_NAME}
     jdbcSandbox = JdbcSandbox(dataSource, transactionManager)
 
     val environment = Environment(databaseEnvironmentId(), transactionFactory, dataSource)

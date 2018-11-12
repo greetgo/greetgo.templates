@@ -1,7 +1,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="All Db Test Suite" parallel="false" verbose="1">
   <listeners>
-///MODIFY replace sandbox {PROJECT_NAME}
+    <!-- ///MODIFY replace sandbox {PROJECT_NAME} -->
     <listener class-name="kz.greetgo.sandbox.register.test.util.TestNgRecreateDbListener"/>
   </listeners>
 
@@ -12,7 +12,7 @@
       </run>
     </groups>
     <packages>
-///MODIFY replace sandbox {PROJECT_NAME}
+      <!-- ///MODIFY replace sandbox {PROJECT_NAME} -->
       <package name="kz.greetgo.sandbox.*"/>
     </packages>
   </test>

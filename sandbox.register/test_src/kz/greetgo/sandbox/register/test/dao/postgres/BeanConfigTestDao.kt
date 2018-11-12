@@ -7,5 +7,5 @@ import kz.greetgo.depinject.core.BeanScanner
 import kz.greetgo.sandbox.register.beans.all.DaoImplFactory
 
 @BeanScanner
-@BeanConfig(defaultFactoryClass = DaoImplFactory::class)
+@BeanConfig(factory = DaoImplFactory::class)
 class BeanConfigTestDao

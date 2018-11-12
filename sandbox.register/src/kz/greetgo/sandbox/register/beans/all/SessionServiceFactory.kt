@@ -16,7 +16,7 @@ import kz.greetgo.security.SecurityBuilders.newSessionStorageBuilder
 @Bean
 class SessionServiceFactory {
 
-///MODIFY replace Sandbox {PROJECT_CC_NAME}
+  ///MODIFY replace Sandbox {PROJECT_CC_NAME}
   lateinit var jdbc: BeanGetter<JdbcSandbox>
 
   @Bean

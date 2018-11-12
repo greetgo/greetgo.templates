@@ -13,7 +13,7 @@ object TestsBeanContainerCreator {
     } catch (ignore: NoImplementor) {
 
       DepinjectUtil.implementAndUseBeanContainers(
-///MODIFY replace sandbox {PROJECT_NAME}
+        ///MODIFY replace sandbox {PROJECT_NAME}
         "kz.greetgo.sandbox.register.test",
         "build/create/recreate_src/" + Date().time
       )
