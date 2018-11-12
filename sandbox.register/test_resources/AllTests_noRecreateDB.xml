@@ -7,7 +7,7 @@
       </run>
     </groups>
     <packages>
-///MODIFY replace sandbox {PROJECT_NAME}
+      <!-- ///MODIFY replace sandbox {PROJECT_NAME} -->
       <package name="kz.greetgo.sandbox.*"/>
     </packages>
   </test>
