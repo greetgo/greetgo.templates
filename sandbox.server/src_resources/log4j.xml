@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
-
-<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="false">
+<log4j:configuration>
 
   <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
     <errorHandler class="org.apache.log4j.helpers.OnlyOnceErrorHandler"/>
     <param name="Target" value="System.out"/>
     <param name="Threshold" value="TRACE"/>
 
-///MODIFY replace sandbox {PROJECT_NAME}
+    <!-- ///MODIFY replace sandbox {PROJECT_NAME} -->
     <layout class="kz.greetgo.sandbox.controller.logging.MyLog4jLayout">
       <param name="LoggerNameCut" value="2"/>
     </layout>
@@ -20,14 +19,14 @@
   </appender>
 
   <appender name="SERVER" class="org.apache.log4j.RollingFileAppender">
-///MODIFY replace sandbox {PROJECT_NAME}
+    <!-- ///MODIFY replace sandbox {PROJECT_NAME} -->
     <param name="File" value="${user.home}/sandbox.d/logs/server.log"/>
     <param name="Threshold" value="INFO"/>
     <param name="Append" value="true"/>
     <param name="MaxFileSize" value="100MB"/>
     <param name="MaxBackupIndex" value="100"/>
 
-///MODIFY replace sandbox {PROJECT_NAME}
+    <!-- ///MODIFY replace sandbox {PROJECT_NAME} -->
     <layout class="kz.greetgo.sandbox.controller.logging.MyLog4jLayout">
       <param name="LoggerNameCut" value="0"/>
     </layout>
@@ -51,7 +50,7 @@
     <!--<appender-ref ref="CONSOLE"/>-->
   </category>
 
-///MODIFY replace sandbox {PROJECT_NAME}
+  <!-- ///MODIFY replace sandbox {PROJECT_NAME} -->
   <category name="kz.greetgo.sandbox.db.register_impl" additivity="true">
     <priority value="TRACE"/>
     <!--<appender-ref ref="CONSOLE"/>-->
