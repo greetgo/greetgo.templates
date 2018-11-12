@@ -1,5 +1,5 @@
 dependencies {
-///MODIFY replace sandbox {PROJECT_NAME}
+  ///MODIFY replace sandbox {PROJECT_NAME}
   compile project(':sandbox.controller')
 
   compile "kz.greetgo.db:greetgo.db:$greetgoDbVersion"
@@ -12,4 +12,20 @@ dependencies {
   compile group: 'org.apache.commons', name: 'commons-dbcp2', version: '2.1.1'
 
   testCompile "kz.greetgo.depinject:greetgo.depinject.testng:$depinjectVersion"
+}
+
+test { options.suites("test_resources/AllTests.xml") }
+
+task recreateDb(type: JavaExec) {
+  group "scripts"
+  ///MODIFY replace sandbox {PROJECT_NAME}
+  main = "kz.greetgo.sandbox.register._develop_.RecreateDb"
+  classpath = sourceSets.test.runtimeClasspath
+}
+
+task recreateDbAndLoadTestData(type: JavaExec) {
+  group "scripts"
+  ///MODIFY replace sandbox {PROJECT_NAME}
+  main = "kz.greetgo.sandbox.register._develop_.RecreateDbAndLoadTestData"
+  classpath = sourceSets.test.runtimeClasspath
 }

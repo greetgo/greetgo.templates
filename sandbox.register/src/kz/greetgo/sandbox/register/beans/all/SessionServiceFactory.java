@@ -18,34 +18,34 @@ import static kz.greetgo.security.SecurityBuilders.newSessionStorageBuilder;
 @Bean
 public class SessionServiceFactory {
 
-///MODIFY replace Sandbox {PROJECT_CC_NAME}
+  ///MODIFY replace Sandbox {PROJECT_CC_NAME}
   public BeanGetter<JdbcSandbox> jdbcSandbox;
 
   @Bean
   public SessionService createSessionService() {
 
     Crypto crypto = newCryptoBuilder()
-///MODIFY replace Sandbox {PROJECT_CC_NAME}
-      .inDb(DbType.Postgres, jdbcSandbox.get())
-      .setTableName("all_params")
-      .setValueFieldName("value_blob")
-      .setIdFieldName("name")
-      .setPrivateKeyIdValue("session.primary.key")
-      .setPublicKeyIdValue("session.public.key")
-      .build();
+        ///MODIFY replace Sandbox {PROJECT_CC_NAME}
+        .inDb(DbType.Postgres, jdbcSandbox.get())
+        .setTableName("all_params")
+        .setValueFieldName("value_blob")
+        .setIdFieldName("name")
+        .setPrivateKeyIdValue("session.primary.key")
+        .setPublicKeyIdValue("session.public.key")
+        .build();
 
     SessionStorage sessionStorage = newSessionStorageBuilder()
-///MODIFY replace Sandbox {PROJECT_CC_NAME}
-      .setJdbc(DbType.Postgres, jdbcSandbox.get())
-      .setTableName("session_storage")
-      .build();
+        ///MODIFY replace Sandbox {PROJECT_CC_NAME}
+        .setJdbc(DbType.Postgres, jdbcSandbox.get())
+        .setTableName("session_storage")
+        .build();
 
     return newSessionServiceBuilder()
-      .setSaltGeneratorOnCrypto(crypto, 17)
-      .setSessionIdLength(17)
-      .setTokenLength(17)
-      .setStorage(sessionStorage)
-      .build();
+        .setSaltGeneratorOnCrypto(crypto, 17)
+        .setSessionIdLength(17)
+        .setTokenLength(17)
+        .setStorage(sessionStorage)
+        .build();
   }
 
 }

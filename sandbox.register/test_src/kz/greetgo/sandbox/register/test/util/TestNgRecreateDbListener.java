@@ -12,17 +12,20 @@ public class TestNgRecreateDbListener implements ISuiteListener {
 
   @Override
   public void onStart(ISuite suite) {
-    if (!"All StandDb Test Suite".equals(suite.getName())) return;
+    if (!"All Db Test Suite".equals(suite.getName())) {
+      return;
+    }
 
     try {
       prepareDatabases();
+    } catch (RuntimeException e) {
+      throw e;
     } catch (Exception e) {
-      if (e instanceof RuntimeException) throw (RuntimeException) e;
       throw new RuntimeException(e);
     }
   }
 
-  private void prepareDatabases() throws Exception {
+  private static void prepareDatabases() throws Exception {
     {
       DbWorker postgresDbWorker = TestsBeanContainerCreator.create().dbWorker();
       postgresDbWorker.cleanConfigsForTeamcity();
