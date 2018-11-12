@@ -66,14 +66,14 @@ public abstract class LocalSessionFactory implements BeanReplacer, HasAfterInjec
   public void afterInject() throws Exception {
     dataSource = createDataSource();
 
-    dataSource = DbLoggingProxyFactory.create(dataSource, new DbLoggingProxyFactory.AbstractSqlViewer() {
-      final Logger logger = Logger.getLogger("DIRECT_SQL");
-
-      @Override
-      protected void logTrace(String message) {
-        if (logger.isTraceEnabled()) logger.trace(message);
-      }
-    });
+//    dataSource = DbLoggingProxyFactory.create(dataSource, new DbLoggingProxyFactory.AbstractSqlViewer() {
+//      final Logger logger = Logger.getLogger("DIRECT_SQL");
+//
+//      @Override
+//      protected void logTrace(String message) {
+//        if (logger.isTraceEnabled()) logger.trace(message);
+//      }
+//    });
 
 ///MODIFY replace Sandbox {PROJECT_CC_NAME}
     jdbcSandbox = new JdbcSandbox(dataSource, transactionManager);
